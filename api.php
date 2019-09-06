@@ -33,7 +33,11 @@ $app->get($api_prefix.'/product/{id:[0-9]+}', function (Request $request, Respon
 		$response->getBody()->write($json);
 		return $response;
 	}
-	$json=json_encode(get_product($args['id'],strtolower($info['field'])),JSON_PRETTY_PRINT);
+	if(!empty($info['field']))
+		$required_field=strtolower($info['field']));
+	else
+		$required_field=null;
+	$json=json_encode(get_product($args['id'],$required_field,JSON_PRETTY_PRINT);
 	$response->getBody()->write($json);
     return $response;
 });
